@@ -1,3 +1,13 @@
+# This is a small learning project for Next.js
+
+## Kulinarium
+
+### A recipe app
+
+This is a small learning project for Next.js. It is a recipe app that allows users to add, edit, and delete recipes.
+
+---
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
