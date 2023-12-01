@@ -11,7 +11,7 @@ export default function HiMom() {
         <p>Click here to go back to where you came from</p>
       </a>
       <a
-        href="x-apple-reminder://create?title=Einkaufsliste%20f%C3%BCr%20R%C3%BChrei&notes=Eier%0AMilch%0ASalz%0APfeffer%0AButter"
+        href="x-apple-reminderkit://create?title=Einkaufsliste%20f%C3%BCr%20R%C3%BChrei&notes=Eier%0AMilch%0ASalz%0APfeffer%0AButter"
         className={styles.card}
         rel="noopener noreferrer"
       >
