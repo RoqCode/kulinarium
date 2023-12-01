@@ -10,6 +10,12 @@ export default function HiMom() {
         </h2>
         <p>Click here to go back to where you came from</p>
       </a>
+      <a href="/" className={styles.card} rel="noopener noreferrer">
+        <h2>
+          Rührei! <span>-&gt;</span>
+        </h2>
+        <p>Rührei-Einkaufsliste</p>
+      </a>
     </main>
   );
 }
