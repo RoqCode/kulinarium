@@ -1,0 +1,9 @@
+@use 'sass:math';
+
+//* Convert Pixels to REM
+/// Only write the number without the unit ("px")
+//? to-rem(32)
+
+@function to-rem($pixels, $context: 16) {
+  @return math.div($pixels, $context) * 1rem;
+}

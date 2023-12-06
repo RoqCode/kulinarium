@@ -1,0 +1,157 @@
+//* Responsive Utilities
+/// 01 Calculator
+/// 02 Spaces
+/// 03 Font-Sizes
+
+@use 'sass:math';
+@use 'sass:string';
+
+//* 01
+//* Calculator
+/// Calculates responsive values based on a given breakpoint
+//? @function res-calc($min, $max, ($lock-min), ($lock-max));
+
+@function res-calc($min, $max, $lock-min: $bp-min, $lock-max: $bp-max) {
+  @return calc(
+    #{$min} + #{strip-unit($max) - strip-unit($min)} * (100vw - #{$lock-min}) /
+      #{strip-unit($lock-max) - strip-unit($lock-min)}
+  );
+}
+
+//* 02
+//* Responsive Mixin
+/// Can be used to get responsive values for commands like margin, padding, width, height etc.
+/// Commands need to be able to accept calc values
+//? @include responsive(width, 8rem, 16rem);
+
+// Default fallback-values
+$bp-min: to-rem(600) !default;
+$bp-max: to-rem(1200) !default;
+
+// Helper to get breakpoints for responsive spaces
+@mixin responsive(
+  $command,
+  $min,
+  $max: null,
+  $lock-min: $bp-min,
+  $lock-max: $bp-max
+) {
+  & {
+    #{$command}: $min;
+  }
+  @if $max {
+    @media (min-width: $lock-min) {
+      & {
+        #{$command}: res-calc($min, $max, $lock-min, $lock-max);
+      }
+    }
+    @media (min-width: $lock-max) {
+      & {
+        #{$command}: $max;
+      }
+    }
+  }
+}
+
+/// Remove the unit
+@function strip-unit($number) {
+  @if type-of($number) == 'number' and not unitless($number) {
+    @return math.div($number, $number * 0 + 1);
+  }
+
+  @return $number;
+}
+
+//* 03
+//* Spaces
+/// Sets a maximum space at breakpoint-xl and a minimum space at breakpoint-md
+/// Between breakpoint-xl and breakpoint-md the space will be calculated realtive to the viewport width
+//? @include space('m t', sm);
+
+@mixin space($command, $type) {
+  // Gets the space from the space map defined in variables
+  $type: string.unquote($type);
+  $space-type: map-get($space-types, $type);
+  $space-min: map-get($space-type, 'min');
+  $space-max: map-get($space-type, 'max');
+
+  // Width/Height
+  @if $command == 'w' {
+    @include responsive(width, $space-min, $space-max);
+  } @else if $command == 'h' {
+    @include responsive(height, $space-min, $space-max);
+  } @else if $command == 'wh' {
+    @include responsive(width, $space-min, $space-max);
+    @include responsive(height, $space-min, $space-max);
+  }
+
+  // Margin
+  @else if $command == 'm' {
+    @include responsive(margin, $space-min, $space-max);
+  } @else if $command == 'm x' {
+    @include responsive(margin-left, $space-min, $space-max);
+    @include responsive(margin-right, $space-min, $space-max);
+  } @else if $command == 'm y' {
+    @include responsive(margin-top, $space-min, $space-max);
+    @include responsive(margin-bottom, $space-min, $space-max);
+  } @else if $command == 'm t' {
+    @include responsive(margin-top, $space-min, $space-max);
+  } @else if $command == 'm r' {
+    @include responsive(margin-right, $space-min, $space-max);
+  } @else if $command == 'm b' {
+    @include responsive(margin-bottom, $space-min, $space-max);
+  } @else if $command == 'm l' {
+    @include responsive(margin-left, $space-min, $space-max);
+  }
+
+  // Padding
+  @else if $command == 'p' {
+    @include responsive(padding, $space-min, $space-max);
+  } @else if $command == 'p x' {
+    @include responsive(padding-left, $space-min, $space-max);
+    @include responsive(padding-right, $space-min, $space-max);
+  } @else if $command == 'p y' {
+    @include responsive(padding-top, $space-min, $space-max);
+    @include responsive(padding-bottom, $space-min, $space-max);
+  } @else if $command == 'p t' {
+    @include responsive(padding-top, $space-min, $space-max);
+  } @else if $command == 'p r' {
+    @include responsive(padding-right, $space-min, $space-max);
+  } @else if $command == 'p b' {
+    @include responsive(padding-bottom, $space-min, $space-max);
+  } @else if $command == 'p l' {
+    @include responsive(padding-left, $space-min, $space-max);
+  }
+
+  // Position
+  @else if $command == 't' {
+    @include responsive(top, $space-min, $space-max);
+  } @else if $command == 'r' {
+    @include responsive(right, $space-min, $space-max);
+  } @else if $command == 'b' {
+    @include responsive(bottom, $space-min, $space-max);
+  } @else if $command == 'l' {
+    @include responsive(left, $space-min, $space-max);
+  }
+
+  // Specific commands
+  @else {
+    @include responsive(#{$command}, $space-min, $space-max);
+  }
+}
+
+//* 04
+//* Font-Sizes
+/// Sets a maximum font-size at breakpoint-xl and a minimum font-size at breakpoint-md
+/// Between breakpoint-xl and breakpoint-md the font-size will be calculated realtive to the viewport width
+//? @include font-size('body-md');
+
+@mixin font-size($type) {
+  // Gets the font-sizes from the font-size map defined in variables
+  $type: string.unquote($type);
+  $size-type: map-get($font-sizes, $type);
+  $size-min: map-get($size-type, 'min');
+  $size-max: map-get($size-type, 'max');
+
+  @include responsive('font-size', $size-min, $size-max);
+}

@@ -1,0 +1,36 @@
+@use './base/variables' as *;
+
+.body {
+  color: $text-color-primary;
+}
+
+.logo {
+  max-height: 4rem;
+}
+
+.navMain {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  ul {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 4rem;
+  }
+
+  &__item {
+    list-style: none;
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    &.active,
+    &:hover {
+      color: red;
+    }
+  }
+}
