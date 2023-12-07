@@ -1,9 +1,18 @@
 @use '../mixins/px-to-rem' as *;
-@use '../mixins/responsive-utils' as *;
 
 //color
 
 $text-color-primary: #383838;
+
+//font-family
+
+$font-family-headline: 'Hedvig Letters Serif', serif;
+$font-family-body: 'Noto Sans', sans-serif;
+
+//font-weight
+
+$font-weight-regular: 400;
+$font-weight-bold: 700;
 
 //font-size
 
@@ -92,28 +101,10 @@ $space-types: (
   ),
 );
 
-// content width
+// breakpoints
 
-.contentWidth {
-  &__content {
-    padding-left: 2rem;
-    padding-right: 2rem;
-
-    @media (min-width: 768px) {
-      margin-left: auto;
-      margin-right: auto;
-      max-width: to-rem(1200) + (2 * 2rem);
-    }
-  }
-  &__viewport {
-    padding-left: initial;
-    padding-right: initial;
-
-    @media (min-width: 768px) {
-      margin-left: initial;
-      margin-right: initial;
-      max-width: initial;
-      width: 100%;
-    }
-  }
-}
+$bp-xs: to-rem(0);
+$bp-sm: to-rem(600);
+$bp-md: to-rem(768);
+$bp-lg: to-rem(1024);
+$bp-xl: to-rem(1200);

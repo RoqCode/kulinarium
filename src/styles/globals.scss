@@ -1,6 +1,10 @@
 //* Normalize
 /// Reset for default and custom stuff
 
+@use './base/variables' as *;
+@use './base/font-styles' as *;
+@use './base/font-import' as *;
+
 *,
 *::before,
 *::after {
@@ -15,6 +19,8 @@
 html,
 body {
   height: 100%;
+  color: $text-color-primary;
+  font-family: $font-family-body;
 }
 
 body {
@@ -76,4 +82,27 @@ ol {
 img,
 textarea {
   display: block;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+@for $i from 1 through 6 {
+  h#{$i} {
+    @extend .h#{$i};
+  }
+}
+
+p,
+li,
+span,
+a,
+button,
+input,
+label,
+textarea,
+select {
+  @extend .paragraph;
 }

@@ -1,17 +1,15 @@
 @use './base/variables' as *;
+@use './base/content-width' as *;
 
-.body {
-  color: $text-color-primary;
-}
-
-.logo {
-  max-height: 4rem;
-}
-
-.navMain {
+.nav-main {
+  @extend .content-width__content;
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  .logo {
+    max-height: 4rem;
+  }
 
   ul {
     display: flex;
@@ -26,6 +24,8 @@
     a {
       text-decoration: none;
       color: inherit;
+      font-weight: $font-weight-bold;
+      text-transform: uppercase;
     }
 
     &.active,

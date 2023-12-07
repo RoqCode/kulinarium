@@ -1,18 +1,18 @@
-import layout from '../../../styles/layout.module.scss';
+import '@/styles/nav-bar.scss';
 
 export default function Navbar() {
   return (
-    <nav className={`${layout.navMain}`}>
-      <div className={layout.logo}>Logo</div>
+    <nav className="nav-main">
+      <div className="logo">Logo</div>
       <div>
         <ul>
-          <li className={layout.navMain__item}>
+          <li className="nav-main__item">
             <a href="#">Entdecken</a>
           </li>
-          <li className={layout.navMain__item}>
+          <li className="nav-main__item">
             <a href="#">Kategorien</a>
           </li>
-          <li className={layout.navMain__item}>
+          <li className="nav-main__item">
             <a href="#">Login</a>
           </li>
         </ul>
